@@ -33,14 +33,21 @@ router.get('/:id', async (req, res) => {
 });
 
 
-router.post('/', (req, res) => {
-  Tag.create(req.body)
-  .then((newTag) => {
-    res.json(newTag);
-  })
-  .catch((err) => {
-    res.json(err);
-  });
+router.post('/', async (req, res) => {
+  try {
+    const TagData = await Tag.create(req.params.id, {
+      include: [{ model: Product, ProductTag}],
+    });
+
+    if (!TagData) {
+      res.status(404).json({ message: 'No tags found with that id!' });
+      return;
+    }
+
+    res.status(200).json(TagData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
   // update a tag's name by its `id` value
 router.put('/:id', (req, res) => {
@@ -64,8 +71,8 @@ router.delete('/:id', (req, res) => {
     where: {
       id: req.params.id
     },
-  }) .then((deletedBook) => {
-    res.json(deletedBook);
+  }) .then((deletedTag) => {
+    res.status(200).json(deletedTag);
   })
   .catch((err) => res.json(err));
 });
