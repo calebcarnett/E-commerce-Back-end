@@ -15,13 +15,15 @@ Product.belongsTo(Category, {
  });
 // Products belongToMany Tags (through ProductTag)
 Product.belongsToMany(Tag, {
-  through: ProductTag,
-  onDelete: 'CASCADE',
+  through: { model: ProductTag,
+  },
+  as: 'product_tags'
  });
 // Tags belongToMany Products (through ProductTag)
  Tag.belongsToMany(Product, {
-  through: ProductTag,
-  onDelete: 'CASCADE',
+  through: { model: ProductTag,
+  },
+  as: 'tag_products'
  });
 
 module.exports = { Product, Category, Tag, ProductTag,};
