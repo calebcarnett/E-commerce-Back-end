@@ -1,7 +1,7 @@
 # E-Commerce Back End
  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
  ## Description
-This project was designed using sequelize to make changes to a MySQL database. 
+This project was designed using sequelize to make changes to a MySQL database. This project was designed to get a basic understanding of the fundamental architecture of e-commerce sites. 
 
  ## Table of contents
  - [Installation](#installation)
