@@ -34,19 +34,14 @@ router.get('/:id', async (req, res) => {
 
 
 router.post('/', async (req, res) => {
+  // create a new tag
   try {
-    const TagData = await Tag.create(req.params.id, {
-      include: [{ model: Product, ProductTag}],
+    const tagData = await Tag.create({
+     tag_name: req.body.tag_name,
     });
-
-    if (!TagData) {
-      res.status(404).json({ message: 'No tags found with that id!' });
-      return;
-    }
-
-    res.status(200).json(TagData);
+    res.status(200).json(tagData);
   } catch (err) {
-    res.status(500).json(err);
+    res.status(400).json(err);
   }
 });
   // update a tag's name by its `id` value
